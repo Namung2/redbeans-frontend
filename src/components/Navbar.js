@@ -1,5 +1,5 @@
 import React,{ useState } from "react";
-import { Code2, Menu, X, Home, Calendar, Users } from 'lucide-react'
+import { Menu, X, Home, Calendar, Users } from 'lucide-react'
 
 function Navbar() {
     //모바일 메뉴 open/close state

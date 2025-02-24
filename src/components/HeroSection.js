@@ -1,5 +1,5 @@
 import  React from 'react';
-import { ArrowRight,Code2, Terminal, Coffee } from 'lucide-react';
+import { Code2, Terminal, Coffee } from 'lucide-react';
 import { Link } from 'react-router-dom';
 //첫 화면 UI
 function HeroSection() {

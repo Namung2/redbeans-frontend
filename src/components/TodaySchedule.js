@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Calendar, Clock, MapPin, ArrowUpRight, Users } from 'lucide-react';
+import {  Clock,  ArrowUpRight, Users } from 'lucide-react';
 
 function TodaySchedule() {
     const [events, setEvents] = useState({
@@ -13,7 +13,6 @@ function TodaySchedule() {
     // 현재 시간 기준으로 일정 상태 확인
     const getEventStatus = (event) => {
         const now = new Date();
-        const eventDate = new Date(event.eventDate);
         const startTime = new Date(`${event.eventDate}T${event.startTime}`);
         const endTime = event.endTime ? new Date(`${event.eventDate}T${event.endTime}`) : null;
 
