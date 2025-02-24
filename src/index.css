@@ -1,0 +1,13 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
+1. @tailwind base는 Tailwind의 기본 스타일을 가져옵니다. 
+이는 모든 HTML 요소의 기본적인 모양을 리셋하고 일관된 시작점을 제공합니다.
+
+2. @tailwind components는 Tailwind의 컴포넌트 클래스들을 가져옵니다. 
+이는 버튼, 카드, 폼 등의 일반적인 UI 요소들을 위한 미리 정의된 스타일들을 제공합니다.
+
+3.@tailwind utilities는 Tailwind의 유틸리티 클래스들 
+이것이 Tailwind의 핵심!!마진, 패딩, 색상, 폰트 크기 등을 제어하는 모든 작은 클래스들이 여기에 포함됩니다. */
