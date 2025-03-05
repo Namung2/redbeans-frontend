@@ -13,23 +13,28 @@ function TodaySchedule() {
     // 현재 시간 기준으로 일정 상태 확인
     const getEventStatus = (event) => {
         const now = new Date();
-    // 오늘 날짜를 YYYY-MM-DD 형식으로 생성
-    const todayStr = new Date().toISOString().split('T')[0];
-
-    // event.eventDate가 오늘 날짜가 아니라면 날짜 비교로 상태 판별
-    if (event.eventDate !== todayStr) {
-        return event.eventDate < todayStr ? 'past' : 'upcoming';
-    }
-
-    // 오늘 날짜라면 시간 정보를 이용하여 상태를 구분
-    const startTime = new Date(`${event.eventDate}T${event.startTime}`);
-    const endTime = event.endTime ? new Date(`${event.eventDate}T${event.endTime}`) : null;
-
-    if (endTime && now > endTime) return 'ended';
-    if (now >= startTime && (!endTime || now <= endTime)) return 'current';
-    if (now < startTime) return 'upcoming';
-
-    return 'past';
+        // 오늘 날짜를 Date 객체로 생성
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // event.eventDate를 Date 객체로 변환
+        const eventDate = new Date(event.eventDate);
+        eventDate.setHours(0, 0, 0, 0);
+        
+        // 날짜 비교
+        if (eventDate.getTime() !== today.getTime()) {
+            return eventDate.getTime() < today.getTime() ? 'past' : 'upcoming';
+        }
+        
+        // 오늘 날짜라면 시간 정보를 이용하여 상태를 구분
+        const startTime = new Date(`${event.eventDate}T${event.startTime}`);
+        const endTime = event.endTime ? new Date(`${event.eventDate}T${event.endTime}`) : null;
+        
+        if (endTime && now > endTime) return 'ended';
+        if (now >= startTime && (!endTime || now <= endTime)) return 'current';
+        if (now < startTime) return 'upcoming';
+        
+        return 'past';
     };
 
     // 일정 데이터 가져오기
@@ -73,6 +78,10 @@ function TodaySchedule() {
                     else acc.pastEvents.push(event);
                     return acc;
                 }, { currentEvents: [], upcomingEvents: [], pastEvents: [] });
+
+                console.log('현재 일정:', sorted.currentEvents.length);
+                console.log('예정된 일정:', sorted.upcomingEvents.length);
+                console.log('종료된 일정:', sorted.pastEvents.length);
 
                 // 각 카테고리 내에서 시간순 정렬
                 ['currentEvents', 'upcomingEvents', 'pastEvents'].forEach(category => {
