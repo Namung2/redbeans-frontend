@@ -13,22 +13,53 @@ function TodaySchedule() {
     // 현재 시간 기준으로 일정 상태 확인
     const getEventStatus = (event) => {
         const now = new Date();
-        const startTime = new Date(`${event.eventDate}T${event.startTime}`);
-        const endTime = event.endTime ? new Date(`${event.eventDate}T${event.endTime}`) : null;
+    // 오늘 날짜를 YYYY-MM-DD 형식으로 생성
+    const todayStr = new Date().toISOString().split('T')[0];
 
-        if (!event.today) return 'past';
-        if (endTime && now > endTime) return 'ended';
-        if (now >= startTime && (!endTime || now <= endTime)) return 'current';
-        return 'upcoming';
+    // event.eventDate가 오늘 날짜가 아니라면 날짜 비교로 상태 판별
+    if (event.eventDate !== todayStr) {
+        return event.eventDate < todayStr ? 'past' : 'upcoming';
+    }
+
+    // 오늘 날짜라면 시간 정보를 이용하여 상태를 구분
+    const startTime = new Date(`${event.eventDate}T${event.startTime}`);
+    const endTime = event.endTime ? new Date(`${event.eventDate}T${event.endTime}`) : null;
+
+    if (endTime && now > endTime) return 'ended';
+    if (now >= startTime && (!endTime || now <= endTime)) return 'current';
+    if (now < startTime) return 'upcoming';
+
+    return 'past';
     };
 
     // 일정 데이터 가져오기
     useEffect(() => {
+
+        const API_BASE_URL = window.location.hostname === 'localhost' 
+        ? 'http://localhost:8080/api' 
+        : 'https://redbeans-backend-production.up.railway.app/api';
+
         const fetchEvents = async () => {
             try {
                 setIsLoading(true);
-                const response = await fetch('http://redbeans-backend-production.up.railway.app/api/notion/events/today');
+                //http://redbeans-backend-production.up.railway.app/api/notion/events/today
+                const response = await fetch('${API_BASE_URL}/notion/events/today');
+                
+                // 응답 상태 확인 및 로깅
+                console.log('응답 상태:', response.status);
+                if (!result.success) {
+                    throw new Error(result.error || '일정을 불러오는데 실패했습니다.');
+                }
+
+                // 응답이 JSON이 아닌 경우에도 텍스트로 확인
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('API 오류 응답:', errorText);
+                    throw new Error(`API 오류: ${response.status} - ${errorText}`);
+                }
+                
                 const result = await response.json();
+                console.log('API 응답 데이터:', result);
 
                 if (!result.success) {
                     throw new Error(result.error || '일정을 불러오는데 실패했습니다.');
