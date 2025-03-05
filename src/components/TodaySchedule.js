@@ -43,7 +43,7 @@ function TodaySchedule() {
             try {
                 setIsLoading(true);
                 //http://redbeans-backend-production.up.railway.app/api/notion/events/today
-                const response = await fetch('${API_BASE_URL}/notion/events/today');
+                const response = await fetch(`${API_BASE_URL}/notion/events/today`);
                 const result = await response.json();
                 // 응답 상태 확인 및 로깅
                 console.log('응답 상태:', response.status);
