@@ -141,8 +141,8 @@ function TodaySchedule() {
             const diffTime = eventDate - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-            if (diffDays === 1) return '오늘';
-            if (diffDays === 0) return '어제';
+            if (diffDays === 0) return '오늘';
+            if (diffDays === -1) return '어제';
             if (diffDays > 0) return `${diffDays}일 후`;
             return `${Math.abs(diffDays-1)}일 전`;
         };
