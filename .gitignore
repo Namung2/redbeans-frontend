@@ -1,0 +1,12 @@
+# node_modules는 절대 올리지 않음
+node_modules/
+
+# 빌드 결과물도 보통은 제외
+build/
+dist/
+
+# macOS 불필요 파일
+.DS_Store
+
+# 환경변수 파일
+.env
