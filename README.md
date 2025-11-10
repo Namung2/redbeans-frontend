@@ -229,6 +229,7 @@ GET /api/notion/inspect
 3. 자동 배포 활성화
 
 **배포 URL:**
+- 벡엔드 먼저 실행하고 프론트 실행 해야함.-> 추후 Google Cloud로 배포 예정
 - Frontend: https://warm-blini-39cdcb.netlify.app
 - Backend: https://redbeans-backend-production.up.railway.app
 
