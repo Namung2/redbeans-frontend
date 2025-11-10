@@ -1,4 +1,4 @@
-# RedBeans Club Website 🫘
+# RedBeans Club Website 
 
 단국대학교 컴퓨터공학과 학술 동아리 RedBeans의 공식 웹사이트입니다.
 
@@ -230,7 +230,7 @@ GET /api/notion/inspect
 
 **배포 URL:**
 - 벡엔드 먼저 실행하고 프론트 실행 해야함.-> 추후 Google Cloud로 배포 예정
-- Frontend: https://warm-blini-39cdcb.netlify.app
+- Frontend: https://redbeans-frontend.vercel.app
 - Backend: https://redbeans-backend-production.up.railway.app
 
 ### 코드 스타일 가이드
