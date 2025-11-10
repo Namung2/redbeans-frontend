@@ -230,7 +230,7 @@ GET /api/notion/inspect
 
 **배포 URL:**
 - 벡엔드 먼저 실행하고 프론트 실행 해야함.-> 추후 Google Cloud로 배포 예정
-- Frontend: https://redbeans-frontend.vercel.app
+- Frontend: [https://redbeans-frontend.vercel.app](https://redbeans-frontend-3ung5ifwh-namwoongs-projects.vercel.app/)
 - Backend: https://redbeans-backend-production.up.railway.app
 
 ### 코드 스타일 가이드
